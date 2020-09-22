@@ -1,16 +1,16 @@
 package flashcards;
 
 public class Card {
-    private final String question;
+    private final String term;
     private final String definition;
 
-    public Card(String question, String definition) {
-        this.question = question;
+    public Card(String term, String definition) {
+        this.term = term;
         this.definition = definition;
     }
 
-    public String getQuestion() {
-        return question;
+    public String getTerm() {
+        return term;
     }
 
     public String getDefinition() {
