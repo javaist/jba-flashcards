@@ -22,12 +22,6 @@ public class Card {
     }
 
     public boolean check(String userInput) {
-        if (definition.equals(userInput)) {
-            System.out.println("Correct!");
-            return true;
-        } else {
-            System.out.println("Wrong. The right answer is \"" + this.definition + "\".");
-            return false;
-        }
+        return definition.equals(userInput);
     }
 }
