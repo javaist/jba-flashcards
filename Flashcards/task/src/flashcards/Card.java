@@ -1,6 +1,10 @@
 package flashcards;
 
-public class Card {
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
+
+public class Card implements Comparable<Card> {
     private final String term;
     private final String definition;
 
@@ -23,5 +27,22 @@ public class Card {
 
     public boolean check(String userInput) {
         return definition.equals(userInput);
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "term='" + term + '\'' +
+                ", definition='" + definition + '\'' +
+                '}';
+    }
+
+    @Override
+    public int compareTo(@NotNull Card card) {
+        return this.toString().compareTo(card.toString());
+    }
+
+    public boolean equals(@NotNull Card card) {
+        return Objects.equals(this.term, card.term) && Objects.equals(this.definition, card.definition);
     }
 }
