@@ -7,10 +7,17 @@ import java.util.Objects;
 public class Card implements Comparable<Card> {
     private final String term;
     private final String definition;
+    private int errors = 0;
 
     public Card(String term, String definition) {
         this.term = term;
         this.definition = definition;
+    }
+
+    public Card(String term, String definition, int errors) {
+        this.term = term;
+        this.definition = definition;
+        this.errors = errors;
     }
 
     public String getTerm() {
@@ -19,10 +26,6 @@ public class Card implements Comparable<Card> {
 
     public String getDefinition() {
         return definition;
-    }
-
-    public void print() {
-        System.out.println("Print the definition of \"" + this.term + "\":");
     }
 
     public boolean check(String userInput) {
@@ -39,7 +42,20 @@ public class Card implements Comparable<Card> {
 
     @Override
     public int compareTo(@NotNull Card card) {
-        return this.toString().compareTo(card.toString());
+        return Integer.compare(card.errors, this.errors);
+    }
+
+    public int increaseErrors() {
+        errors += 1;
+        return errors;
+    }
+
+    public void resetErrors() {
+        errors = 0;
+    }
+
+    public int getErrors() {
+        return errors;
     }
 
     public boolean equals(@NotNull Card card) {

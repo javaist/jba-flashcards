@@ -1,39 +1,59 @@
 package flashcards;
 
 import java.util.Objects;
-import java.util.Scanner;
 
 public class Main {
 
-    static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        CardView cards = new CardView();
+        View view = new View();
         String action;
+        String[] actions = new String[]{
+                "add", "remove", "import", "export", "ask",
+                "log", "hardest card", "reset stats",
+                "exit"
+        };
+        StringBuilder menu = new StringBuilder("Input the action (");
+        for (int i = 0; i < actions.length - 1; i++) {
+            menu.append(actions[i]);
+            menu.append(", ");
+        }
+        menu.append(actions[actions.length-1]);
+        menu.append("):");
         do {
-            System.out.println("Input the action (add, remove, import, export, ask, exit):");
-            action = scanner.nextLine();
+            Log.println(menu.toString());
+//            System.out.println(menu.toString());
+            action = Log.nextLine();
             switch (action) {
                 case "exit":
-                    System.out.println("Bye bye!");
+                    Log.println("Bye bye!");
                     return;
                 case "add":
-                    cards.add();
+                    view.add();
                     break;
                 case "remove":
-                    cards.remove();
+                    view.remove();
                     break;
                 case "import":
-                    cards.readFromFile();
+                    view.readFromFile();
                     break;
                 case "export":
-                    cards.writeToFile();
+                    view.writeToFile();
                     break;
                 case "ask":
-                    cards.ask();
+                    view.ask();
+                    break;
+                case "log":
+                    view.log();
+                    break;
+                case "hardest card":
+                    view.hardest();
+                    break;
+                case "reset stats":
+                    view.reset();
                     break;
                 case "show":
-                    cards.show();
+                    view.show();
                     break;
                 default:
                     break;
