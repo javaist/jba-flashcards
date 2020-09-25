@@ -44,13 +44,27 @@ public class View {
         } catch (FileNotFoundException e) {
             Log.println("File not found.");
         }
-
     }
+
+    void readFromFile(String fileName) {
+        try {
+            int loads = cards.loadFromFile(fileName);
+            Log.printf("%d cards have been loaded.\n", loads);
+        } catch (FileNotFoundException e) {
+            Log.println("File not found.");
+        }
+    }
+
 
     void writeToFile() {
         Log.println("File name:");
         String fileName = Log.nextLine();
         int saves = cards.saveToFile(fileName);
+        Log.printf("%d cards have been saved.\n", saves);
+    }
+
+    void writeToFile(String exportFileName) {
+        int saves = cards.saveToFile(exportFileName);
         Log.printf("%d cards have been saved.\n", saves);
     }
 
@@ -112,4 +126,6 @@ public class View {
     void show(){
         cards.show();
     }
+
+
 }

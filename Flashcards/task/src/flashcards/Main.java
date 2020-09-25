@@ -7,6 +7,22 @@ public class Main {
 
     public static void main(String[] args) {
         View view = new View();
+        String exportFileName = null;
+
+        if (args.length > 0) {
+            for (int i = 0; i < args.length; i++) {
+                if ("-import".equals(args[i])) {
+                    view.readFromFile(args[i + 1]);
+                    i++;
+                }
+                if ("-export".equals(args[i])) {
+                    exportFileName = args[i+ 1];
+                    i++;
+                }
+            }
+        }
+
+        // Building first line
         String action;
         String[] actions = new String[]{
                 "add", "remove", "import", "export", "ask",
@@ -20,6 +36,7 @@ public class Main {
         }
         menu.append(actions[actions.length-1]);
         menu.append("):");
+        // Building first line finished
         do {
             Log.println(menu.toString());
 //            System.out.println(menu.toString());
@@ -27,6 +44,9 @@ public class Main {
             switch (action) {
                 case "exit":
                     Log.println("Bye bye!");
+                    if (exportFileName != null) {
+                        view.writeToFile(exportFileName);
+                    }
                     return;
                 case "add":
                     view.add();
